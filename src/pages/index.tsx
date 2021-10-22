@@ -1,3 +1,4 @@
+import { Heading } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
@@ -6,13 +7,9 @@ const Home: NextPage = () => {
     <div>
       <Head>
         <title>Magister | Atividades Extracurriculares</title>
-        <meta
-          name="description"
-          content="Módulo de gerênciamento de atividades extracurriculares do Magister."
-        />
       </Head>
 
-      <h1>Magister | Atividades Extracurriculares</h1>
+      <Heading>Magister | Atividades Extracurriculares</Heading>
     </div>
   );
 };
