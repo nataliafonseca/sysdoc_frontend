@@ -95,6 +95,7 @@ export function StudentDocumentsList() {
                         onClick={() => {
                           console.log('visualizar');
                         }}
+                        size="sm"
                       >
                         Visualizar
                       </Button>
@@ -103,6 +104,7 @@ export function StudentDocumentsList() {
                         onClick={() => {
                           console.log('remover');
                         }}
+                        size="sm"
                       >
                         Remover
                       </Button>
