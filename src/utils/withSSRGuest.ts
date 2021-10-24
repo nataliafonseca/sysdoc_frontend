@@ -14,7 +14,7 @@ export function withSSRGuest<P>(fn: GetServerSideProps<P>): GetServerSideProps {
     if (cookies['magisterdoc.token']) {
       return {
         redirect: {
-          destination: '/dashboard',
+          destination: '/',
           permanent: false
         }
       };

@@ -28,7 +28,7 @@ export function withSSRAuth<P>(
     if (!token) {
       return {
         redirect: {
-          destination: '/',
+          destination: '/login',
           permanent: false
         }
       };
@@ -39,7 +39,7 @@ export function withSSRAuth<P>(
     if (!(!roles || roles.includes(user.role))) {
       return {
         redirect: {
-          destination: '/',
+          destination: '/login',
           permanent: false
         }
       };
