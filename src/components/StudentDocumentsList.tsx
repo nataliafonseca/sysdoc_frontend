@@ -16,6 +16,7 @@ import {
   Tr,
   useBreakpointValue
 } from '@chakra-ui/react';
+import dayjs from 'dayjs';
 import { IoSearch, IoTrashOutline } from 'react-icons/io5';
 import { RiAddLine } from 'react-icons/ri';
 import { useDocuments } from '../hooks/useDocuments';
@@ -71,7 +72,7 @@ export function StudentDocumentsList() {
               {isWideVersion && <Th>Carga Horária</Th>}
               {isWideVersion && <Th>Descrição</Th>}
               <Th>Status</Th>
-              {isWideVersion && <Th>Data de Criação</Th>}
+              {isWideVersion && <Th>Criado em</Th>}
               <Th isNumeric></Th>
             </Tr>
           </Thead>
@@ -86,7 +87,11 @@ export function StudentDocumentsList() {
                 {document.status === 0 && <Td>Pendente</Td>}
                 {document.status === 1 && <Td>Aprovado</Td>}
                 {document.status === 2 && <Td>Reprovado</Td>}
-                {isWideVersion && <Td>{document.createdAt}</Td>}
+                {isWideVersion && (
+                  <Td>
+                    {dayjs(document.createdAt).format('DD/MM/YYYY HH:mm')}
+                  </Td>
+                )}
                 <Td isNumeric>
                   {isWideVersion ? (
                     <Stack direction="row" spacing="2">
