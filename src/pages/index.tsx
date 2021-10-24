@@ -1,4 +1,3 @@
-import { Flex } from '@chakra-ui/react';
 import Head from 'next/head';
 import { Header } from '../components/Header';
 import { PermissionController } from '../components/PermissionController';
@@ -11,12 +10,10 @@ export default function Login() {
       <Head>
         <title>MagisterDoc | Dashboard</title>
       </Head>
-      <Flex direction="column" h="100vh">
-        <Header />
-        <PermissionController roles={['student']}>
-          <StudentDocumentsList />
-        </PermissionController>
-      </Flex>
+      <Header />
+      <PermissionController roles={['student']}>
+        <StudentDocumentsList />
+      </PermissionController>
     </>
   );
 }
