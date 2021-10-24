@@ -29,6 +29,7 @@
     "react-hook-form": "^7.17.5",
     "react-icons": "^4.3.1",
     "react-input-mask": "^2.0.4",
+    "react-query": "^3.28.0",
     "react-toastify": "^8.0.3",
     "yup": "^0.32.11"
   },
