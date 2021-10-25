@@ -5,15 +5,24 @@ import {
   ButtonGroup,
   Flex,
   Heading,
+  Icon,
+  IconButton,
   Link as ChakraLink,
   SimpleGrid,
   Text,
+  useBreakpointValue,
   useColorModeValue
 } from '@chakra-ui/react';
 import dayjs from 'dayjs';
 import Head from 'next/head';
 import Link from 'next/link';
 import router from 'next/router';
+import {
+  IoArrowBackOutline,
+  IoBanOutline,
+  IoCheckmarkOutline,
+  IoTrashOutline
+} from 'react-icons/io5';
 import { toast } from 'react-toastify';
 import { Header } from '../components/Header';
 import { PermissionController } from '../components/PermissionController';
@@ -42,6 +51,11 @@ type ViewProps = {
 };
 
 export default function View({ document }: ViewProps) {
+  const isWideVersion = useBreakpointValue({
+    base: false,
+    lg: true
+  });
+
   async function onApprove() {
     try {
       const api = setupApiClient();
@@ -70,10 +84,27 @@ export default function View({ document }: ViewProps) {
     }
   }
 
+  async function onDelete() {
+    try {
+      if (
+        window.confirm(
+          'Tem certeza que deseja deletar esse documento? Essa ação é irreversível.'
+        )
+      ) {
+        const api = setupApiClient();
+        await api.delete(`/documents/${document.id}`);
+        toast.success('Documento removido com sucesso.');
+        router.push('/');
+      }
+    } catch (err) {
+      toast.error(err.response.data.message);
+    }
+  }
+
   return (
     <>
       <Head>
-        <title>MagisterDoc | Dashboard</title>
+        <title>MagisterDoc | Documento</title>
       </Head>
       <Header />
       <Flex
@@ -87,6 +118,97 @@ export default function View({ document }: ViewProps) {
       >
         <Flex justify="space-between" mb="8">
           <Heading size="lg">Documento</Heading>
+          <ButtonGroup
+            ml={[0, 'auto']}
+            flexDirection="row"
+            spacing={['0.2rem', '0.5rem']}
+          >
+            <Link href="/" passHref>
+              {isWideVersion ? (
+                <Button
+                  size="sm"
+                  colorScheme="gray"
+                  minW={['100%', '8rem']}
+                  mb={['0.5rem', 0]}
+                >
+                  Voltar
+                </Button>
+              ) : (
+                <IconButton
+                  aria-label="Voltar"
+                  size="sm"
+                  icon={<Icon as={IoArrowBackOutline} fontSize="24" />}
+                />
+              )}
+            </Link>
+            <PermissionController roles={['admin']}>
+              {isWideVersion ? (
+                <Button
+                  size="sm"
+                  colorScheme="red"
+                  minW={['100%', '8rem']}
+                  onClick={onReject}
+                  disabled={document.status !== 0}
+                  mb={['0.5rem', 0]}
+                >
+                  Reprovar
+                </Button>
+              ) : (
+                <IconButton
+                  aria-label="Reprovar"
+                  colorScheme="red"
+                  size="sm"
+                  onClick={onReject}
+                  disabled={document.status !== 0}
+                  icon={<Icon as={IoBanOutline} fontSize="24" />}
+                />
+              )}
+              {isWideVersion ? (
+                <Button
+                  size="sm"
+                  colorScheme="blue"
+                  minW={['100%', '8rem']}
+                  onClick={onApprove}
+                  disabled={document.status !== 0}
+                >
+                  Aprovar
+                </Button>
+              ) : (
+                <IconButton
+                  aria-label="Aprovar"
+                  colorScheme="blue"
+                  size="sm"
+                  onClick={onApprove}
+                  disabled={document.status !== 0}
+                  icon={<Icon as={IoCheckmarkOutline} fontSize="24" />}
+                />
+              )}
+            </PermissionController>
+            <PermissionController roles={['student']}>
+              {isWideVersion ? (
+                <Button
+                  size="sm"
+                  ml={[0, 'auto']}
+                  colorScheme="red"
+                  minW={['100%', '8rem']}
+                  onClick={onDelete}
+                  disabled={document.status !== 0}
+                  mb={['0.5rem', 0]}
+                >
+                  Remover
+                </Button>
+              ) : (
+                <IconButton
+                  icon={<Icon as={IoTrashOutline} fontSize="xl" />}
+                  onClick={onDelete}
+                  disabled={document.status !== 0}
+                  aria-label="Remover"
+                  colorScheme="red"
+                  size="sm"
+                />
+              )}
+            </PermissionController>
+          </ButtonGroup>
         </Flex>
         <Box w="100%">
           <SimpleGrid columns={[1, 6]} gap={['0.5rem', '1rem']} mb="2rem">
@@ -182,42 +304,6 @@ export default function View({ document }: ViewProps) {
           <AspectRatio mt="0.25rem" mb="1rem" w="100%">
             <iframe src={document.pdf} />
           </AspectRatio>
-          <Flex w="100%" direction={['column', 'row']}>
-            <Link href="/" passHref>
-              <Button
-                colorScheme="gray"
-                minW={['100%', '8rem']}
-                mb={['0.5rem', 0]}
-              >
-                Voltar
-              </Button>
-            </Link>
-            <PermissionController roles={['admin']}>
-              <ButtonGroup
-                ml={[0, 'auto']}
-                flexDirection={['column', 'row']}
-                spacing={[0, '0.5rem']}
-              >
-                <Button
-                  colorScheme="red"
-                  minW={['100%', '8rem']}
-                  onClick={onReject}
-                  disabled={document.status !== 0}
-                  mb={['0.5rem', 0]}
-                >
-                  Reprovar
-                </Button>
-                <Button
-                  colorScheme="blue"
-                  minW={['100%', '8rem']}
-                  onClick={onApprove}
-                  disabled={document.status !== 0}
-                >
-                  Aprovar
-                </Button>
-              </ButtonGroup>
-            </PermissionController>
-          </Flex>
         </Box>
       </Flex>
     </>

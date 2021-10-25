@@ -14,15 +14,15 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { AxiosResponse } from 'axios';
 import Head from 'next/head';
 import Link from 'next/link';
+import router from 'next/router';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import InputMask from 'react-input-mask';
 import { toast } from 'react-toastify';
 import * as yup from 'yup';
 import { Header } from '../components/Header';
 import { Input } from '../components/Input';
 import { api } from '../services/api';
 import { withSSRAuth } from '../utils/withSSRAuth';
-import InputMask from 'react-input-mask';
-import router from 'next/router';
 
 type Document = {
   id: string;

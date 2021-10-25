@@ -1,6 +1,4 @@
-import { useContext } from 'react';
 import { useQuery } from 'react-query';
-import { AuthContext } from '../context/AuthContext';
 import { api } from '../services/api';
 
 type Document = {
@@ -12,14 +10,18 @@ type Document = {
   status: number;
   createdAt: Date;
   user_id: string;
-  user: {
-    name: string;
-    enrolment: string;
-  };
+  user: User;
 };
 
-export async function getAllDocuments(page: number) {
-  const response = await api.get(`/documents?page=${page}`);
+type User = {
+  id: string;
+  name: string;
+  enrolment: string;
+  role: string;
+};
+
+export async function getAllDocuments(page: number, status: number) {
+  const response = await api.get(`/documents?page=${page}&status=${status}`);
   const headers = response.headers;
   const documents = response.data as Document[];
   const totalCount = Number(headers['x-total-count']);
@@ -27,8 +29,10 @@ export async function getAllDocuments(page: number) {
   return { documents, totalCount };
 }
 
-export async function getUserDocuments(page: number) {
-  const response = await api.get(`/documents/user?page=${page}`);
+export async function getUserDocuments(page: number, status: number) {
+  const response = await api.get(
+    `/documents/user?page=${page}&status=${status}`
+  );
   const headers = response.headers;
   const documents = response.data as Document[];
   const totalCount = Number(headers['x-total-count']);
@@ -36,16 +40,14 @@ export async function getUserDocuments(page: number) {
   return { documents, totalCount };
 }
 
-export function useDocuments(page: number) {
-  const { user } = useContext(AuthContext);
-
+export function useDocuments(page: number, status: number, role: string) {
   return useQuery(
-    ['documents', page],
-    user?.role === 'admin'
-      ? () => getAllDocuments(page)
-      : () => getUserDocuments(page),
+    ['documents', page, status],
+    role === 'admin'
+      ? () => getAllDocuments(page, status)
+      : () => getUserDocuments(page, status),
     {
-      staleTime: 1000 * 5
+      staleTime: 1000 * 5 * 60
     }
   );
 }
