@@ -100,8 +100,6 @@ export default function Upload() {
           type
         }
       );
-
-      console.log(fileList[0]);
       const formData = new FormData();
       formData.append('file', fileList[0]);
       const config = {
