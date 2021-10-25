@@ -22,6 +22,7 @@ import { Input } from '../components/Input';
 import { api } from '../services/api';
 import { withSSRAuth } from '../utils/withSSRAuth';
 import InputMask from 'react-input-mask';
+import router from 'next/router';
 
 type Document = {
   id: string;
@@ -113,6 +114,9 @@ export default function Upload() {
         formData,
         config
       );
+
+      toast.success('Documento enviado com sucesso!');
+      router.push('/');
     } catch (err) {
       toast.error(err.response.data.message);
     }
@@ -152,11 +156,27 @@ export default function Upload() {
                 error={errors.type}
                 {...register('type')}
               >
-                <option value="Branca">Branca</option>
-                <option value="Cinza e Branca">Cinza e Branca</option>
-                <option value="Cinza">Cinza</option>
-                <option value="Cinza e Preta">Cinza e Preta</option>
-                <option value="Amarela e Branca">Amarela e Branca</option>
+                <option value="Apresentação de Trabalho Cientifico">
+                  Apresentação de Trabalho Cientifico
+                </option>
+                <option value="Congressos/Seminários/Simpósios/Jornadas/Cursos/Minicursos">
+                  Congressos/Seminários/Simpósios/Jornadas/Cursos/Minicursos
+                </option>
+                <option value="Disciplinas Extracurriculares">
+                  Disciplinas Extracurriculares
+                </option>
+                <option value="Iniciação Científica">
+                  Iniciação Científica
+                </option>
+                <option value="Mentorias">Mentorias</option>
+                <option value="Monitorias">Monitorias</option>
+                <option value="Projetos e Programas de Extensão">
+                  Projetos e Programas de Extensão
+                </option>
+                <option value="Projetos e Programas de Pesquisa">
+                  Projetos e Programas de Pesquisa
+                </option>
+                <option value="Outros">Outros</option>
               </Select>
             </FormControl>
             <Input

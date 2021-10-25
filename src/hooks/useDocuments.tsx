@@ -14,26 +14,32 @@ type Document = {
   user_id: string;
 };
 
-export async function getAllDocuments(): Promise<Document[]> {
-  const documents = await api
-    .get('/documents')
-    .then((response) => response.data as Document[]);
-  return documents;
+export async function getAllDocuments(page: number) {
+  const response = await api.get(`/documents?page=${page}`);
+  const headers = response.headers;
+  const documents = response.data as Document[];
+  const totalCount = Number(headers['x-total-count']);
+
+  return { documents, totalCount };
 }
 
-export async function getUserDocuments(): Promise<Document[]> {
-  const documents = await api
-    .get('/documents/user')
-    .then((response) => response.data as Document[]);
-  return documents;
+export async function getUserDocuments(page: number) {
+  const response = await api.get(`/documents/user?page=${page}`);
+  const headers = response.headers;
+  const documents = response.data as Document[];
+  const totalCount = Number(headers['x-total-count']);
+
+  return { documents, totalCount };
 }
 
-export function useDocuments() {
+export function useDocuments(page: number) {
   const { user } = useContext(AuthContext);
 
   return useQuery(
-    'documents',
-    user?.role === 'admin' ? () => getAllDocuments() : () => getUserDocuments(),
+    ['documents', page],
+    user?.role === 'admin'
+      ? () => getAllDocuments(page)
+      : () => getUserDocuments(page),
     {
       staleTime: 1000 * 5
     }
