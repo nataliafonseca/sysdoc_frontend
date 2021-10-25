@@ -211,7 +211,7 @@ export default function View({ document }: ViewProps) {
           </ButtonGroup>
         </Flex>
         <Box w="100%">
-          <SimpleGrid columns={[1, 6]} gap={['0.5rem', '1rem']} mb="2rem">
+          <SimpleGrid columns={[1, 3]} gap={['0.5rem', '1rem']} mb="2rem">
             <Box
               borderRadius="md"
               boxShadow="base"
@@ -284,9 +284,12 @@ export default function View({ document }: ViewProps) {
               <Heading size="sm" mb="0.5rem">
                 Aluno
               </Heading>
-              <Text>{document.user.name}</Text>
-              <Text color="gray.300" fontSize="small">
-                {document.user.enrolment}
+              <Text>
+                {document.user.name}
+                <Text as="span" color="gray.300" fontSize="small">
+                  {' '}
+                  - {document.user.enrolment}
+                </Text>
               </Text>
             </Box>
           </SimpleGrid>
