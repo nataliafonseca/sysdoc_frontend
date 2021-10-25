@@ -2,6 +2,7 @@ import {
   AspectRatio,
   Box,
   Button,
+  ButtonGroup,
   Flex,
   Heading,
   Link as ChakraLink,
@@ -12,7 +13,10 @@ import {
 import dayjs from 'dayjs';
 import Head from 'next/head';
 import Link from 'next/link';
+import router from 'next/router';
+import { toast } from 'react-toastify';
 import { Header } from '../components/Header';
+import { PermissionController } from '../components/PermissionController';
 import { setupApiClient } from '../services/api';
 import { withSSRAuth } from '../utils/withSSRAuth';
 
@@ -38,6 +42,34 @@ type ViewProps = {
 };
 
 export default function View({ document }: ViewProps) {
+  async function onApprove() {
+    try {
+      const api = setupApiClient();
+      await api.patch('/documents/approve', { document_id: document.id });
+      toast.success('Documento aprovado');
+      router.push('/');
+    } catch (err) {
+      toast.error(err.response.data.message);
+    }
+  }
+
+  async function onReject() {
+    try {
+      if (
+        window.confirm(
+          'Tem certeza que deseja reprovar esse documento? Essa ação é irreversível.'
+        )
+      ) {
+        const api = setupApiClient();
+        await api.patch('/documents/reject', { document_id: document.id });
+        toast.success('Documento reprovado');
+        router.push('/');
+      }
+    } catch (err) {
+      toast.error(err.response.data.message);
+    }
+  }
+
   return (
     <>
       <Head>
@@ -128,7 +160,7 @@ export default function View({ document }: ViewProps) {
               p="1rem"
             >
               <Heading size="sm" mb="0.5rem">
-                Autor
+                Aluno
               </Heading>
               <Text>{document.user.name}</Text>
               <Text color="gray.300" fontSize="small">
@@ -150,11 +182,42 @@ export default function View({ document }: ViewProps) {
           <AspectRatio mt="0.25rem" mb="1rem" w="100%">
             <iframe src={document.pdf} />
           </AspectRatio>
-          <Link href="/" passHref>
-            <Button colorScheme="gray" minW={['100%', '8rem']}>
-              Voltar
-            </Button>
-          </Link>
+          <Flex w="100%" direction={['column', 'row']}>
+            <Link href="/" passHref>
+              <Button
+                colorScheme="gray"
+                minW={['100%', '8rem']}
+                mb={['0.5rem', 0]}
+              >
+                Voltar
+              </Button>
+            </Link>
+            <PermissionController roles={['admin']}>
+              <ButtonGroup
+                ml={[0, 'auto']}
+                flexDirection={['column', 'row']}
+                spacing={[0, '0.5rem']}
+              >
+                <Button
+                  colorScheme="red"
+                  minW={['100%', '8rem']}
+                  onClick={onReject}
+                  disabled={document.status !== 0}
+                  mb={['0.5rem', 0]}
+                >
+                  Reprovar
+                </Button>
+                <Button
+                  colorScheme="blue"
+                  minW={['100%', '8rem']}
+                  onClick={onApprove}
+                  disabled={document.status !== 0}
+                >
+                  Aprovar
+                </Button>
+              </ButtonGroup>
+            </PermissionController>
+          </Flex>
         </Box>
       </Flex>
     </>

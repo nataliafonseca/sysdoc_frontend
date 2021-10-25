@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { AdminDocumentsList } from '../components/AdminDocumentsList';
 import { Header } from '../components/Header';
 import { PermissionController } from '../components/PermissionController';
 import { StudentDocumentsList } from '../components/StudentDocumentsList';
@@ -13,6 +14,9 @@ export default function Login() {
       <Header />
       <PermissionController roles={['student']}>
         <StudentDocumentsList />
+      </PermissionController>
+      <PermissionController roles={['admin']}>
+        <AdminDocumentsList />
       </PermissionController>
     </>
   );

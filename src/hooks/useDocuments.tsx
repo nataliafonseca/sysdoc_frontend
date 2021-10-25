@@ -12,6 +12,10 @@ type Document = {
   status: number;
   createdAt: Date;
   user_id: string;
+  user: {
+    name: string;
+    enrolment: string;
+  };
 };
 
 export async function getAllDocuments(page: number) {

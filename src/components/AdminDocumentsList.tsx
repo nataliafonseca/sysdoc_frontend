@@ -7,7 +7,6 @@ import {
   Link as ChakraLink,
   Link,
   Spinner,
-  Stack,
   Table,
   Tag,
   Tbody,
@@ -21,37 +20,19 @@ import {
 import dayjs from 'dayjs';
 import router from 'next/router';
 import { useState } from 'react';
-import { IoSearch, IoTrashOutline } from 'react-icons/io5';
+import { IoSearch } from 'react-icons/io5';
 import { RiAddLine } from 'react-icons/ri';
-import { toast } from 'react-toastify';
 import { useDocuments } from '../hooks/useDocuments';
-import { api } from '../services/api';
 import { Pagination } from './Pagination';
 
-export function StudentDocumentsList() {
+export function AdminDocumentsList() {
   const [page, setPage] = useState(1);
-  const { data, isLoading, isFetching, error, refetch } = useDocuments(page);
+  const { data, isLoading, isFetching, error } = useDocuments(page);
 
   const isWideVersion = useBreakpointValue({
     base: false,
     lg: true
   });
-
-  async function onDelete(id: string) {
-    try {
-      if (
-        window.confirm(
-          'Tem certeza que deseja deletar esse documento? Essa ação é irreversível.'
-        )
-      ) {
-        await api.delete(`/documents/${id}`);
-        toast.success('Documento removido com sucesso.');
-        refetch();
-      }
-    } catch (err) {
-      toast.error(err.response.data.message);
-    }
-  }
 
   function onView(id: string) {
     router.push({ pathname: '/view', query: { id } });
@@ -101,6 +82,7 @@ export function StudentDocumentsList() {
                 {isWideVersion && <Th>Tipo</Th>}
                 {isWideVersion && <Th>Carga Horária</Th>}
                 <Th>Status</Th>
+                {isWideVersion && <Th>Aluno</Th>}
                 {isWideVersion && <Th>Criado em</Th>}
                 <Th isNumeric></Th>
               </Tr>
@@ -136,6 +118,7 @@ export function StudentDocumentsList() {
                       </Tag>
                     </Td>
                   )}
+                  {isWideVersion && <Td>{document.user.name}</Td>}
                   {isWideVersion && (
                     <Td>
                       {dayjs(document.createdAt).format('DD/MM/YYYY HH:mm')}
@@ -143,47 +126,25 @@ export function StudentDocumentsList() {
                   )}
                   <Td isNumeric>
                     {isWideVersion ? (
-                      <Stack direction="row" spacing="2">
-                        <Button
-                          colorScheme="gray"
-                          onClick={() => {
-                            onView(document.id);
-                          }}
-                          size="sm"
-                        >
-                          Visualizar
-                        </Button>
-                        <Button
-                          colorScheme="red"
-                          onClick={() => {
-                            onDelete(document.id);
-                          }}
-                          size="sm"
-                        >
-                          Remover
-                        </Button>
-                      </Stack>
+                      <Button
+                        colorScheme="gray"
+                        onClick={() => {
+                          onView(document.id);
+                        }}
+                        size="sm"
+                      >
+                        Analisar
+                      </Button>
                     ) : (
-                      <Stack direction="row" spacing="2">
-                        <IconButton
-                          icon={<Icon as={IoSearch} fontSize="xl" />}
-                          onClick={() => {
-                            onView(document.id);
-                          }}
-                          aria-label="Visualizar"
-                          colorScheme="gray"
-                          size="sm"
-                        />
-                        <IconButton
-                          icon={<Icon as={IoTrashOutline} fontSize="xl" />}
-                          onClick={() => {
-                            onDelete(document.id);
-                          }}
-                          aria-label="Visualizar"
-                          colorScheme="red"
-                          size="sm"
-                        />
-                      </Stack>
+                      <IconButton
+                        icon={<Icon as={IoSearch} fontSize="xl" />}
+                        onClick={() => {
+                          onView(document.id);
+                        }}
+                        aria-label="Visualizar"
+                        colorScheme="gray"
+                        size="sm"
+                      />
                     )}
                   </Td>
                 </Tr>
