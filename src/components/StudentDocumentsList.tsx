@@ -21,6 +21,7 @@ import router from 'next/router';
 import { useState } from 'react';
 import { IoSearch, IoTrashOutline } from 'react-icons/io5';
 import { RiAddLine } from 'react-icons/ri';
+import { toast } from 'react-toastify';
 import { useDocuments } from '../hooks/useDocuments';
 import { api } from '../services/api';
 import { Pagination } from './Pagination';
@@ -35,8 +36,19 @@ export function StudentDocumentsList() {
   });
 
   async function onDelete(id: string) {
-    await api.delete(`/documents/${id}`);
-    refetch();
+    try {
+      if (
+        window.confirm(
+          'Tem certeza que deseja deletar esse documento? Essa ação é irreversível.'
+        )
+      ) {
+        await api.delete(`/documents/${id}`);
+        toast.success('Documento removido com sucesso.');
+        refetch();
+      }
+    } catch (err) {
+      toast.error(err.response.data.message);
+    }
   }
 
   function onView(id: string) {
