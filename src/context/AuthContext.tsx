@@ -70,7 +70,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       setUser(user);
 
-      router.push('/');
+      window.location.reload();
     } catch (err) {
       toast.error(err.response.data.message);
     }
