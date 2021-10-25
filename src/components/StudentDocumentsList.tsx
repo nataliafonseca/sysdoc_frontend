@@ -17,17 +17,28 @@ import {
   useBreakpointValue
 } from '@chakra-ui/react';
 import dayjs from 'dayjs';
+import router from 'next/router';
 import { IoSearch, IoTrashOutline } from 'react-icons/io5';
 import { RiAddLine } from 'react-icons/ri';
 import { useDocuments } from '../hooks/useDocuments';
+import { api } from '../services/api';
 
 export function StudentDocumentsList() {
-  const { data, isLoading, isFetching, error } = useDocuments();
+  const { data, isLoading, isFetching, error, refetch } = useDocuments();
 
   const isWideVersion = useBreakpointValue({
     base: false,
     lg: true
   });
+
+  async function onDelete(id: string) {
+    await api.delete(`/documents/${id}`);
+    refetch();
+  }
+
+  function onView(id: string) {
+    router.push({ pathname: '/view', query: { id } });
+  }
 
   return (
     <Flex
@@ -98,7 +109,7 @@ export function StudentDocumentsList() {
                       <Button
                         colorScheme="gray"
                         onClick={() => {
-                          console.log('visualizar');
+                          onView(document.id);
                         }}
                         size="sm"
                       >
@@ -107,7 +118,7 @@ export function StudentDocumentsList() {
                       <Button
                         colorScheme="red"
                         onClick={() => {
-                          console.log('remover');
+                          onDelete(document.id);
                         }}
                         size="sm"
                       >
@@ -119,7 +130,7 @@ export function StudentDocumentsList() {
                       <IconButton
                         icon={<Icon as={IoSearch} fontSize="xl" />}
                         onClick={() => {
-                          console.log('visualizar');
+                          onView(document.id);
                         }}
                         aria-label="Visualizar"
                         colorScheme="gray"
@@ -128,7 +139,7 @@ export function StudentDocumentsList() {
                       <IconButton
                         icon={<Icon as={IoTrashOutline} fontSize="xl" />}
                         onClick={() => {
-                          console.log('remover');
+                          onDelete(document.id);
                         }}
                         aria-label="Visualizar"
                         colorScheme="red"

@@ -4,7 +4,7 @@ import { AuthContext } from '../context/AuthContext';
 import { api } from '../services/api';
 
 type Document = {
-  id: number;
+  id: string;
   pdf: string;
   description: string;
   hours: number;
