@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import Router from 'next/router';
+import router from 'next/router';
 import { destroyCookie, parseCookies, setCookie } from 'nookies';
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -70,7 +70,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       setUser(user);
 
-      Router.push('/');
+      router.push('/');
     } catch (err) {
       toast.error(err.response.data.message);
     }
@@ -79,7 +79,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   function signOut() {
     destroyCookie(undefined, 'magisterdoc.token');
 
-    Router.push('/');
+    router.push('/');
   }
 
   return (
