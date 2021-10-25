@@ -31,6 +31,7 @@ import { toast } from 'react-toastify';
 import { Header } from '../components/Header';
 import { Pagination } from '../components/Pagination';
 import { PermissionController } from '../components/PermissionController';
+import { UserStats } from '../components/UserStats';
 import { useDocuments } from '../hooks/useDocuments';
 import { api, setupApiClient } from '../services/api';
 import { withSSRAuth } from '../utils/withSSRAuth';
@@ -99,6 +100,9 @@ export default function Index({ user }: IndexPageProps) {
         px={['4', '6']}
         direction="column"
       >
+        <PermissionController roles={['student']}>
+          <UserStats />
+        </PermissionController>
         <Flex mb="8">
           <Heading size="lg">
             Documentos
@@ -106,6 +110,7 @@ export default function Index({ user }: IndexPageProps) {
               <Spinner size="sm" color="gray.500" ml="4" />
             )}
           </Heading>
+
           <Flex
             flex="1"
             alignSelf="center"
