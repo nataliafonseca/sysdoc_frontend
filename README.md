@@ -1,34 +1,86 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">
+  <img src="public/images/logo.png" width="50%" />
+</h1>
 
-## Getting Started
+<p align="center">
+  <a href="#contexto-">Contexto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#desafio-">Desafio</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#como-acessar-%EF%B8%8F">Como Acessar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#tecnologias-">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#licença-">Licença</a>
+</p>
 
-First, run the development server:
+## Contexto 📝
 
-```bash
+Projeto desenvolvido para o desafio proposto pelo MundoJix como parte do processo de seleção para Pessoa Desenvolvedora Full Stack Junior.
+
+Trata-se de um modulo/sistema para validação de horas extracurriculares, onde os alunos podem anexar seus documentos e controlar a quantidade de horas que já concluíram.
+
+## Desafio ✅
+
+Foi solicitada a implementação de uma interface de exibição dos documentos enviados pelo estudante, contendo:
+
+[x] Grid com a lista de documentos enviados pelo aluno;
+[x] Coluna com link do nome do documento para acesso ao documento;
+[x] Coluna com o tipo de atividade do certificado;
+[x] Coluna com a quantidade de horas;
+[x] Coluna com o status do documento: Homologado / Não-Homologado.
+
+Além disso, foi sugerida a implementação da função de backend para consultar os dados no banco e retornar um objeto ao front com a lista dos certificados do usuário.
+
+## Como Acessar ▶️
+
+A interface da aplicação está disponível no endereço https://magisterdoc.vercel.app. Para o login, você pode optar por um dos seguintes usuários:
+
+**Administrativo**
+Matrícula: ```123456```
+Senha: ```123456```
+
+**Aluno 1**
+Matrícula: ```1234567890```
+Senha: ```123456```
+
+**Aluno 2**
+Matrícula: ```1234567891```
+Senha: ```123456```
+
+**Aluno 3**
+Matrícula: ```1234567892```
+Senha: ```123456```
+
+**Aluno 4**
+Matrícula: ```1234567893```
+Senha: ```123456```
+
+Se desejar rodar a aplicação na sua maquina local, seguem as instruções.
+
+Para executar o projeto, você precisa ter o [Node.js](https://nodejs.org) instalado em sua máquina.
+
+1. Clonando o projeto:
+```
+git clone https://github.com/nataliafonseca/mundojix-challenge_frontend
+```
+2. Acessando a pasta clonada:
+```
+cd mundojix-challenge_frontend
+```
+3. Instalando as dependências
+```
+npm i
+```
+4. Executando a aplicação
+```
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+A interface poderá ser acessada em http://localhost:3000.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Tecnologias 💻
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+O frontend da aplicação foi implementado em **React.js** com **Next.js** utilizando a linguagem **TypeScript**.
+Para a estilização dos componentes, foi utilizada a biblioteca **chakra-ui**.
+O deploy do frontend da aplicação foi feito no **Vercel**.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Licença 📃
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Este projeto está sob a licença MIT. Para mais detalhes, veja o arquivo [LICENSE](LICENSE).
