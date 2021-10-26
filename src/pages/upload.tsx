@@ -148,7 +148,6 @@ export default function Upload() {
                 TIPO
               </FormLabel>
               <Select
-                size="sm"
                 variant="flushed"
                 placeholder="Selecione o tipo"
                 error={errors.type}
