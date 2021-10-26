@@ -1,44 +1,23 @@
 import { Box, Flex, Stack, Text, useColorModeValue } from '@chakra-ui/react';
-import { AxiosResponse } from 'axios';
-import { useEffect, useState } from 'react';
-import { api } from '../services/api';
+import { useDocuments } from '../hooks/useDocuments';
 
-type Document = {
-  id: string;
-  pdf: string;
-  description: string;
-  hours: number;
-  type: string;
-  status: number;
-  createdAt: Date;
-  user_id: string;
+type User = {
+  role: string;
 };
 
-export function UserStats() {
-  const [approvedDocuments, setApprovedDocuments] = useState([] as Document[]);
-  const [pendingDocuments, setPendingDocuments] = useState([] as Document[]);
+type UserStatsProps = {
+  user: User;
+};
 
-  useEffect(() => {
-    async function getUserDocuments() {
-      const pending: AxiosResponse<Document[]> = await api.get(
-        '/documents/user?page=all&status=0'
-      );
-      const approved: AxiosResponse<Document[]> = await api.get(
-        '/documents/user?page=all&status=1'
-      );
+export function UserStats({ user }: UserStatsProps) {
+  const { data: approved } = useDocuments(0, 1, user.role);
+  const { data: pending } = useDocuments(0, 0, user.role);
 
-      setPendingDocuments(pending.data);
-      setApprovedDocuments(approved.data);
-    }
-
-    getUserDocuments();
-  }, []);
-
-  const totalApproved = approvedDocuments.reduce((acc, curr) => {
+  const totalApproved = approved?.documents.reduce((acc, curr) => {
     return acc + curr.hours;
   }, 0);
 
-  const totalPending = pendingDocuments.reduce((acc, curr) => {
+  const totalPending = pending?.documents.reduce((acc, curr) => {
     return acc + curr.hours;
   }, 0);
 

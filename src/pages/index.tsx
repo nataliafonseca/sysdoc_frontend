@@ -101,7 +101,7 @@ export default function Index({ user }: IndexPageProps) {
         direction="column"
       >
         <PermissionController roles={['student']}>
-          <UserStats />
+          <UserStats user={user} />
         </PermissionController>
         <Flex mb="8">
           <Heading size="lg">
