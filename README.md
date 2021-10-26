@@ -20,11 +20,11 @@ Trata-se de um modulo/sistema para validação de horas extracurriculares, onde 
 
 Foi solicitada a implementação de uma interface de exibição dos documentos enviados pelo estudante, contendo:
 
-[x] Grid com a lista de documentos enviados pelo aluno;
-[x] Coluna com link do nome do documento para acesso ao documento;
-[x] Coluna com o tipo de atividade do certificado;
-[x] Coluna com a quantidade de horas;
-[x] Coluna com o status do documento: Homologado / Não-Homologado.
+[x] Grid com a lista de documentos enviados pelo aluno;  
+[x] Coluna com link do nome do documento para acesso ao documento;  
+[x] Coluna com o tipo de atividade do certificado;  
+[x] Coluna com a quantidade de horas;  
+[x] Coluna com o status do documento: Homologado / Não-Homologado.  
 
 Além disso, foi sugerida a implementação da função de backend para consultar os dados no banco e retornar um objeto ao front com a lista dos certificados do usuário.
 
@@ -32,28 +32,27 @@ Além disso, foi sugerida a implementação da função de backend para consulta
 
 A interface da aplicação está disponível no endereço https://magisterdoc.vercel.app. Para o login, você pode optar por um dos seguintes usuários:
 
-**Administrativo**
-Matrícula: ```123456```
-Senha: ```123456```
+**Administrativo**  
+Matrícula: ```123456```  
+Senha: ```123456```  
 
-**Aluno 1**
-Matrícula: ```1234567890```
-Senha: ```123456```
+**Aluno 1**  
+Matrícula: ```1234567890```  
+Senha: ```123456```  
 
-**Aluno 2**
-Matrícula: ```1234567891```
-Senha: ```123456```
+**Aluno 2**  
+Matrícula: ```1234567891```  
+Senha: ```123456```  
 
-**Aluno 3**
-Matrícula: ```1234567892```
-Senha: ```123456```
+**Aluno 3**  
+Matrícula: ```1234567892```  
+Senha: ```123456```  
 
-**Aluno 4**
-Matrícula: ```1234567893```
-Senha: ```123456```
+**Aluno 4**  
+Matrícula: ```1234567893```  
+Senha: ```123456```  
 
-Se desejar rodar a aplicação na sua maquina local, seguem as instruções.
-
+Se desejar rodar a aplicação na sua maquina local, seguem as instruções.  
 Para executar o projeto, você precisa ter o [Node.js](https://nodejs.org) instalado em sua máquina.
 
 1. Clonando o projeto:
