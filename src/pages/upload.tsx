@@ -123,7 +123,7 @@ export default function Upload() {
   return (
     <>
       <Head>
-        <title>MagisterDoc | Upload de Documento</title>
+        <title>MagisterDoc | Envio de Documento</title>
       </Head>
       <Header />
       <Flex
@@ -136,7 +136,7 @@ export default function Upload() {
         direction="column"
       >
         <Flex justify="space-between" mb="8">
-          <Heading size="lg">Documentos</Heading>
+          <Heading size="lg">Envio de Documento</Heading>
         </Flex>
         <Box w="100%" as="form" onSubmit={handleSubmit(handleUpload)}>
           <Stack spacing={['6', '8']}>
