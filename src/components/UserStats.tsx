@@ -24,7 +24,13 @@ export function UserStats({ user }: UserStatsProps) {
   return (
     <>
       <Flex>
-        <Stack spacing="1rem" direction="row" ml="auto" mb="3rem">
+        <Stack
+          spacing="1rem"
+          minW={['100%', 0]}
+          direction={['column', 'row']}
+          ml="auto"
+          mb="3rem"
+        >
           <Box
             bg={useColorModeValue('gray.100', 'gray.700')}
             p="1rem"
