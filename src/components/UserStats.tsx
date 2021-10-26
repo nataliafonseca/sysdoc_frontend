@@ -1,4 +1,5 @@
 import { Box, Flex, Stack, Text, useColorModeValue } from '@chakra-ui/react';
+import { useEffect } from 'react';
 import { useDocuments } from '../hooks/useDocuments';
 
 type User = {
@@ -7,11 +8,16 @@ type User = {
 
 type UserStatsProps = {
   user: User;
+  trigger: boolean;
 };
 
-export function UserStats({ user }: UserStatsProps) {
+export function UserStats({ user, trigger }: UserStatsProps) {
   const { data: approved } = useDocuments(0, 1, user.role);
-  const { data: pending } = useDocuments(0, 0, user.role);
+  const { data: pending, refetch } = useDocuments(0, 0, user.role);
+
+  useEffect(() => {
+    refetch();
+  }, [trigger]);
 
   const totalApproved = approved?.documents.reduce((acc, curr) => {
     return acc + curr.hours;

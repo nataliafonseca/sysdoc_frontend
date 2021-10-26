@@ -48,6 +48,7 @@ type IndexPageProps = {
 };
 
 export default function Index({ user }: IndexPageProps) {
+  const [triggerStatsUpload, SetTriggerStatsUpload] = useState(false);
   const [page, setPage] = useState(1);
   const [statusFilter, setStatusFilter] = useState(3);
   const { data, isLoading, isFetching, error, refetch } = useDocuments(
@@ -75,6 +76,7 @@ export default function Index({ user }: IndexPageProps) {
         await api.delete(`/documents/${id}`);
         toast.success('Documento removido com sucesso.');
         refetch();
+        SetTriggerStatsUpload(!triggerStatsUpload);
       }
     } catch (err) {
       toast.error(err.response.data.message);
@@ -101,7 +103,7 @@ export default function Index({ user }: IndexPageProps) {
         direction="column"
       >
         <PermissionController roles={['student']}>
-          <UserStats user={user} />
+          <UserStats user={user} trigger={triggerStatsUpload} />
         </PermissionController>
         <Flex mb="8">
           <Heading size="lg">
