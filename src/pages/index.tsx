@@ -241,6 +241,7 @@ export default function Index({ user }: IndexPageProps) {
                           <PermissionController roles={['student']}>
                             <Button
                               colorScheme="red"
+                              disabled={document.status !== 0}
                               onClick={() => {
                                 onDelete(document.id);
                               }}
@@ -264,6 +265,7 @@ export default function Index({ user }: IndexPageProps) {
                           <PermissionController roles={['student']}>
                             <IconButton
                               icon={<Icon as={IoTrashOutline} fontSize="xl" />}
+                              disabled={document.status !== 0}
                               onClick={() => {
                                 onDelete(document.id);
                               }}
