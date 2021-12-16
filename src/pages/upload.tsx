@@ -123,7 +123,7 @@ export default function Upload() {
   return (
     <>
       <Head>
-        <title>MagisterDoc | Envio de Documento</title>
+        <title>SysDoc | Envio de Documento</title>
       </Head>
       <Header />
       <Flex

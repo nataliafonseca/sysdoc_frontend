@@ -104,7 +104,7 @@ export default function View({ document }: ViewProps) {
   return (
     <>
       <Head>
-        <title>MagisterDoc | Documento</title>
+        <title>SysDoc | Documento</title>
       </Head>
       <Header />
       <Flex

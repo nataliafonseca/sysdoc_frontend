@@ -11,7 +11,7 @@ export function withSSRGuest<P>(fn: GetServerSideProps<P>): GetServerSideProps {
   ): Promise<GetServerSidePropsResult<P>> => {
     const cookies = parseCookies(ctx);
 
-    if (cookies['magisterdoc.token']) {
+    if (cookies['sysdoc.token']) {
       return {
         redirect: {
           destination: '/',

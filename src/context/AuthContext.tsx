@@ -41,7 +41,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   useEffect(() => {
     async function getLoggedUser() {
-      const { 'magisterdoc.token': token } = parseCookies();
+      const { 'sysdoc.token': token } = parseCookies();
 
       if (token) {
         const response: AxiosResponse<User> = await api.get('/profile');
@@ -62,7 +62,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       const { authToken, user } = response.data;
 
-      setCookie(undefined, 'magisterdoc.token', authToken, {
+      setCookie(undefined, 'sysdoc.token', authToken, {
         maxAge: 60 * 60 * 24 * 30, // 30 days
         path: '/',
         sameSite: true
@@ -77,7 +77,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }
 
   function signOut() {
-    destroyCookie(undefined, 'magisterdoc.token');
+    destroyCookie(undefined, 'sysdoc.token');
 
     router.push('/');
   }

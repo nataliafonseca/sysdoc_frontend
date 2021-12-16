@@ -45,7 +45,7 @@ export default function Login() {
   return (
     <>
       <Head>
-        <title>MagisterDoc | Login</title>
+        <title>SysDoc | Login</title>
       </Head>
       <Flex w="100vw" h="100vh" direction="column">
         <Flex
@@ -77,7 +77,7 @@ export default function Login() {
               textAlign="center"
               mb="3rem"
             >
-              magister
+              sys
               <Text as="span" color={useColorModeValue('blue.500', 'blue.200')}>
                 doc
               </Text>

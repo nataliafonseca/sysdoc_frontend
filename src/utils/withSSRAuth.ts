@@ -23,7 +23,7 @@ export function withSSRAuth<P>(
     ctx: GetServerSidePropsContext
   ): Promise<GetServerSidePropsResult<P>> => {
     const cookies = parseCookies(ctx);
-    const token = cookies['magisterdoc.token'] as string;
+    const token = cookies['sysdoc.token'] as string;
 
     if (!token) {
       return {

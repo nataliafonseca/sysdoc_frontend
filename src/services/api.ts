@@ -16,7 +16,7 @@ export function setupApiClient(ctx: ContextType = undefined) {
   const api = axios.create({
     baseURL: process.env.NEXT_PUBLIC_BACKEND_URI,
     headers: {
-      Authorization: `Bearer ${cookies['magisterdoc.token']}`
+      Authorization: `Bearer ${cookies['sysdoc.token']}`
     }
   });
 

@@ -38,7 +38,7 @@ export function Header() {
           fontFamily="quicksand"
           textAlign="center"
         >
-          magister
+          sys
           <Text
             as="span"
             color={colorMode === 'light' ? 'blue.500' : 'blue.200'}

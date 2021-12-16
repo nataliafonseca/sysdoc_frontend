@@ -90,7 +90,7 @@ export default function Index({ user }: IndexPageProps) {
   return (
     <>
       <Head>
-        <title>MagisterDoc</title>
+        <title>SysDoc</title>
       </Head>
       <Header />
       <Flex
