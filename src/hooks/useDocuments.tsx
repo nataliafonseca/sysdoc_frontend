@@ -45,9 +45,6 @@ export function useDocuments(page: number, status: number, role: string) {
     ['documents', page, status],
     role === 'admin'
       ? () => getAllDocuments(page, status)
-      : () => getUserDocuments(page, status),
-    {
-      staleTime: 1000 * 5 * 60
-    }
+      : () => getUserDocuments(page, status)
   );
 }
