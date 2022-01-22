@@ -7,7 +7,7 @@ export default class MyDocument extends Document {
         <Head>
           <meta
             name="description"
-            content="Módulo de gerênciamento de atividades extracurriculares."
+            content="Módulo de gerenciamento de atividades extracurriculares."
           />
 
           {/* <!-- Favicon  --> */}
