@@ -83,3 +83,10 @@ O deploy do frontend da aplicação foi feito no **Vercel**.
 ## Licença 📃
 
 Este projeto está sob a licença MIT. Para mais detalhes, veja o arquivo [LICENSE](LICENSE).
+
+---
+<div align="center">
+  
+  ![Deploy Status Badge](https://img.shields.io/github/deployments/nataliafonseca/sysdoc_frontend/Production?label=vercel&logo=vercel&style=for-the-badge)
+
+</div>
